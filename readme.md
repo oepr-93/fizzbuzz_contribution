@@ -12,7 +12,7 @@ static getExplorersByStack(explorers, stack_){
         return explorersByMission;
     }
 ```
-La nueva funcionalidad se crea dentro de `ExplorerService`, esta es utilizada e invocada desde `ExplorerController` para que, posteriormente pueda ser usada dentro del server.
+La nueva funcionalidad se crea dentro de `ExplorerService`, esta es utilizada e invocada desde `ExplorerController` para que, posteriormente pueda ser usada dentro del `Server`.
 
 `ExplorerController.js`
 ```javascript
@@ -22,7 +22,7 @@ static getExplorersByStack(stack){
     }
 ```
 
-`ExplorerController.js`
+`Server.js`
 ```javascript
 app.get("/v1/explorers/stack/:stacks", (request, response) => {
     const stacks = request.params.stacks;
