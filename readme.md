@@ -1,16 +1,33 @@
-# Linter
+## Requerimiento:
 
-1. Instalar dependencia:
+Crea un endpoint nuevo que regrese toda la lista de explorers filtrados por un stack.
 
-> npm install eslint --save-dev
 
-2. Modificar package.json, agregar debajo de test
+`ExplorerService.js`
+```javascript
+static getExplorersByStack(explorers, stack_){
+        const explorersByMission = explorers.filter((explorer) =>{
+            return explorer.stacks.includes(stack_);
+        });
+        return explorersByMission;
+    }
+```
+La nueva funcionalidad se crea dentro de `ExplorerService`, esta es utilizada e invocada desde `ExplorerController` para que, posteriormente pueda ser usada dentro del server.
 
-> "linter": "node ./node_modules/eslint/bin/eslint.js"
+`ExplorerController.js`
+```javascript
+static getExplorersByStack(stack){
+        const explorers = Reader.readJsonFile("./explorers.json");
+        return ExplorerService.getExplorersByStack(explorers, stack);
+    }
+```
 
-3. Crear configuración en archivo .eslintrc (si se versiona)
+`ExplorerController.js`
+```javascript
+app.get("/v1/explorers/stack/:stacks", (request, response) => {
+    const stacks = request.params.stacks;
+    const explorersWithStack = ExplorerController.getExplorersByStack(stacks);
+    response.json({stack: request.params.stacks, explorers: explorersWithStack});
+});
+```
 
-> npm init @eslint/config
-
-Rules: https://eslint.org/docs/rules/
-Airbnb Code Style: https://github.com/airbnb/javascript
