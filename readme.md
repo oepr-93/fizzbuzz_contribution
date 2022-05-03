@@ -14,6 +14,12 @@ static getExplorersByStack(explorers, stack_){
 ```
 La nueva funcionalidad se crea dentro de `ExplorerService`, esta es utilizada e invocada desde `ExplorerController` para que, posteriormente pueda ser usada dentro del `Server`.
 
+```mermaid
+graph TD;
+    ExplorerService-->ExplorerController;
+    ExplorerController-->Server
+```
+
 `ExplorerController.js`
 ```javascript
 static getExplorersByStack(stack){
